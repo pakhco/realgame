@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>真心话大冒险</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body>
+		<div id="box">
+			<div id="scanner" class="scanner">
+				<input type="text" name="" id="userName" value="请输入您的名字" />
+			</div>
+			<div id="btn" class="btn">
+				开始
+			</div>
+			<div id="show">
+				<div id="divImg"></div>
+				<div id="divTitle"></div>
+				<div id="btn2">拖走下一位</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var arr = [{ title: "你的初吻是几岁在什么地方被什么人夺去的?", imgSrc: "img/1.jpg" },
+				{ title: "你的初恋是几岁?", imgSrc: "img/3.jpg" },
+				{ title: "你的初恋对象是谁?", imgSrc: "img/4.jpg" },
+				{ title: "大学一共挂过几门课？", imgSrc: "img/5.jpg" },
+				{ title: "大学所有考试中，你考到最低的一门是什么课，考了几分？", imgSrc: "img/timg.jpg" },
+				{ title: "如果再给你一次机会，回到高中毕业那天，你最想对某一位异性说什么话？", imgSrc: "img/x.jpg" },
+				{ title: "你曾经意淫过在场的哪一位？如果过去没有的话，你现在会选哪一位作为YY对象？", imgSrc: "img/4.jpg" }
+			];
+
+			window.onload = function() {
+				var scanner = document.getElementById("scanner");
+				var btn = document.getElementById("btn");
+				var show = document.getElementById("show");
+				var divImg = document.getElementById("divImg");
+				var divTitle = document.getElementById("divTitle");
+				var Btn2 = document.getElementById("Btn2");
+				var userName = document.getElementById("userName");
+				scanner.className = "inputDivStart";
+				btn.className = "btnStart";
+				var lth = arr.length;
+				var newImg;
+				userName.onfocus = function() {
+					this.value = "";
+				}
+
+				btn.addEventListener("click", function() {
+					var randomNum;
+					if(userName.value == "" || userName.value == "请输入您的名字") {
+						divTitle.innerHTML = "你叫什么咩哇?";
+						divTitle.style.display = "block";
+						btn2.innerHTML = "输入个名字，再来一次 ";
+
+						btn2.addEventListener("click", function() {
+							userName.value = "请输入您的名字";
+							//							divImg.removeChild(newImg);
+							divImg.style.display = "none";
+							divTitle.style.display = "none";
+							scanner.style.left = "50%";
+							btn.style.left = "50%";
+							show.style.top = "100%";
+							box.style.backgroundColor = "rgba(255,255,255,0)";
+						});
+					} else {
+						btn2.innerHTML = "拖走下一位";
+						randomNum = parseInt(Math.random() * lth);
+						if(divImg.children.length>=1){divImg.removeChild(newImg)};
+						newImg = document.createElement("img");
+						newImg.src = arr[randomNum].imgSrc;
+						divImg.appendChild(newImg);
+						divTitle.innerHTML = userName.value + ":" + arr[randomNum].title;
+						divImg.style.display = "block";
+						divTitle.style.display = "block";
+                    
+						
+					}
+					scanner.style.left = "200%";
+					btn.style.left = "200%";
+					show.style.top = "0%";
+					box.style.backgroundColor = "rgba(255,255,255,0.8)";
+					
+					btn2.addEventListener("click", function() {
+							userName.value = "请输入您的名字";
+							divImg.style.display = "none";
+							divTitle.style.display = "none";
+							scanner.style.left = "50%";
+							btn.style.left = "50%";
+							show.style.top = "100%";
+							box.style.backgroundColor = "rgba(255,255,255,0)";
+							
+						});
+				})
+
+			}
+		</script>
+	</body>
+
+</html>
